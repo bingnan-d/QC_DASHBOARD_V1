@@ -9,6 +9,8 @@ from ftplib import FTP
 import tempfile
 import ftplib
 from PIL import Image
+import time
+
 
 #============================================================
 #for setting the page title
@@ -141,13 +143,13 @@ if current_page=="Station Network":
     #stcdpath = r"C:\Users\CHCUK-11\OneDrive - CHC Navigation\CodeList\dashboard\stnList3000_selected_v20221116.xlsx"
     stationmap_show(stcdpath)
 #=====================================
-# elif current_page==pages[0]:#welcome page
-#     st.markdown('<div class="center-text">Welcome to SWAS QC</div>', unsafe_allow_html=True)
-#     utc_placeholder = st.empty() #for 
-#     while True:
-#         current_utc_time = get_utc_time()
-#         utc_placeholder.markdown(f'<div class="utc-time">{current_utc_time}</div>', unsafe_allow_html=True)
-#         time.sleep(1)
+elif current_page==pages[0]:#welcome page
+    st.markdown('<div class="center-text">Welcome to SWAS QC</div>', unsafe_allow_html=True)
+    utc_placeholder = st.empty() #for 
+    while True:
+        current_utc_time = get_utc_time()
+        utc_placeholder.markdown(f'<div class="utc-time">{current_utc_time}</div>', unsafe_allow_html=True)
+        time.sleep(1)
 #====================================
 elif current_page=="Satellite World View":
     st.markdown("<h1 style='text-align: center; margin-top: -30px;'>Satellite World View</h1>", unsafe_allow_html=True)
