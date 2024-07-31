@@ -30,7 +30,8 @@ if 'current_page' not in st.session_state:
     st.session_state.current_page = pages[0]
 
 #logopath = "C:\\Work\\Projects\\dashboard\\picture\\sidebar_logo.png"
-logopath =r"C:\Users\CHCUK-11\OneDrive - CHC Navigation\CodeList\dashboard\picture\sidebar_logo.png"
+#logopath =r"C:\Users\CHCUK-11\OneDrive - CHC Navigation\CodeList\dashboard\picture\sidebar_logo.png"
+logopath ="picture\sidebar_logo.png"
 st.sidebar.image(logopath, width=200)
 
 clicked = {page: st.sidebar.button(page) for page in pages}
@@ -84,8 +85,8 @@ def get_utc_time():
 #===================================================================================
 if current_page=="Station Network":
     st.markdown("<h1 style='text-align: center; margin-top: -30px;'>Station Network</h1>", unsafe_allow_html=True)
-    #stcdpath = "C:\\Work\\Projects\\dashboard\\stnList3000_selected_v20221116.xlsx"
-    stcdpath = r"C:\Users\CHCUK-11\OneDrive - CHC Navigation\CodeList\dashboard\stnList3000_selected_v20221116.xlsx"
+    stcdpath = "stnList3000_selected_v20221116.xlsx"
+    #stcdpath = r"C:\Users\CHCUK-11\OneDrive - CHC Navigation\CodeList\dashboard\stnList3000_selected_v20221116.xlsx"
     stationmap_show(stcdpath)
 #=====================================
 elif current_page==pages[0]:#welcome page
@@ -116,8 +117,8 @@ elif current_page=="Satellite Sky Plot":
 
 #====================================
 elif current_page=="General Scanner":
-    #plotpath = "C:\Work\Projects\dashboard\plot_pool\general_scan_plots\general_scanner_bars_2 - 20_mean.html"
-    plotpath = r"C:\Users\CHCUK-11\OneDrive - CHC Navigation\CodeList\dashboard\plot_pool\general_scan_plots\general_scanner_bars_2 - 20_mean.html"
+    plotpath = "general_scan_plots/general_scanner_bars_2 - 20_mean.html"
+    #plotpath = r"C:\Users\CHCUK-11\OneDrive - CHC Navigation\CodeList\dashboard\plot_pool\general_scan_plots\general_scanner_bars_2 - 20_mean.html"
     display_html_plot(plotpath,1000)
 #=============================================
 elif current_page=="Constellation Performance":
@@ -163,8 +164,8 @@ elif current_page=="Constellation Performance":
         selected_availability = st.selectbox('', availability,index=availability.index(default_availability))
     year = selected_date
     doy = selected_date.timetuple().tm_yday
-    #plotfolder = "C:\\Work\\Projects\\dashboard\\plot_pool\\missing_data_plots"
-    plotfolder = "C:\\Users\\CHCUK-11\\OneDrive - CHC Navigation\\CodeList\\dashboard\\plot_pool\\missing_data_plots"
+    plotfolder = "plot_pool/missing_data_plots"
+    #plotfolder = "C:\\Users\\CHCUK-11\\OneDrive - CHC Navigation\\CodeList\\dashboard\\plot_pool\\missing_data_plots"
     if selected_sys=='GPS':
         sysname = 1
     elif selected_sys=='BDS':
