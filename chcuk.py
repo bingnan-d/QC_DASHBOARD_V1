@@ -13,6 +13,9 @@ from datetime import date, timedelta, datetime, timezone
 import streamlit.components.v1 as components
 import plotly.graph_objects as go
 from display_map import stationmap_show
+from ftplib import FTP
+import tempfile
+
 #============================================================
 #for setting the page title
 st.set_page_config(
@@ -31,7 +34,19 @@ if 'current_page' not in st.session_state:
 
 #logopath = "C:\\Work\\Projects\\dashboard\\picture\\sidebar_logo.png"
 #logopath =r"C:\Users\CHCUK-11\OneDrive - CHC Navigation\CodeList\dashboard\picture\sidebar_logo.png"
-logopath ="picture\sidebar_logo.png"
+
+FTP_HOST = "3.9.58.243"
+FTP_USER = "RSDQE"
+FTP_PASS = "Gnss12345/"  # Replace with your actual password
+FTP_FILE_PATH = "/Data_from_SH_to_download/dashboard/sidebar_logo.png"
+ftp = FTP(FTP_HOST)
+ftp.login(FTP_USER, FTP_PASS)
+
+with tempfile.NamedTemporaryFile(delete=False, suffix=".png") as temp_file:
+    ftp.retrbinary(f"RETR {FTP_FILE_PATH}", temp_file.write)
+    logopath = temp_file.name
+ftp.quit()
+
 st.sidebar.image(logopath, width=200)
 
 clicked = {page: st.sidebar.button(page) for page in pages}
@@ -117,9 +132,13 @@ elif current_page=="Satellite Sky Plot":
 
 #====================================
 elif current_page=="General Scanner":
-    plotpath = "general_scan_plots/general_scanner_bars_2 - 20_mean.html"
-    #plotpath = r"C:\Users\CHCUK-11\OneDrive - CHC Navigation\CodeList\dashboard\plot_pool\general_scan_plots\general_scanner_bars_2 - 20_mean.html"
-    display_html_plot(plotpath,1000)
+    plotpath = "general_scanner_bars_2 - 20_mean.html"
+    # #plotpath = r"C:\Users\CHCUK-11\OneDrive - CHC Navigation\CodeList\dashboard\plot_pool\general_scan_plots\general_scanner_bars_2 - 20_mean.html"
+    # display_html_plot(plotpath,1000)
+    with open(plotpath, 'r') as f:
+        deck_html = f.read()
+    # Render the HTML content in an iframe with specified height
+    st.components.v1.html(deck_html, height=700)  # Adjust height as needed
 #=============================================
 elif current_page=="Constellation Performance":
     st.markdown("<h1 style='text-align: center; margin-top: -30px;'>Constellation Performance</h1>", unsafe_allow_html=True)
@@ -164,7 +183,7 @@ elif current_page=="Constellation Performance":
         selected_availability = st.selectbox('', availability,index=availability.index(default_availability))
     year = selected_date
     doy = selected_date.timetuple().tm_yday
-    plotfolder = "plot_pool/missing_data_plots"
+    plotfolder = "plot_pool\missing_data_plots"
     #plotfolder = "C:\\Users\\CHCUK-11\\OneDrive - CHC Navigation\\CodeList\\dashboard\\plot_pool\\missing_data_plots"
     if selected_sys=='GPS':
         sysname = 1
