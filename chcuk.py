@@ -366,7 +366,7 @@ elif current_page=="Daily Report":
 
 #=================================
 elif current_page=="Station Performance":
-    st.markdown("<h1 style='text-align: center; margin-top: -30px;'>Constellation Performance</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; margin-top: -30px;'>Station Performance</h1>", unsafe_allow_html=True)
     col1, col2, col3, col4, col5, col6 = st.columns([1,1,1,1,1,1])
     with col1:
         st.markdown(
