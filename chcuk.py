@@ -323,7 +323,7 @@ elif current_page=="Daily Report":
                 })
             df = pd.DataFrame(top_worst_stations)
             df.index = df.index + 1  
-            st.markdown(lines[2])
+            st.markdown(lines[1])
             st.table(df)
     
     else:
